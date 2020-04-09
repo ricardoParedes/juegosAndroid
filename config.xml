@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+ xmlns:gap = "http://phonegap.com/ns/1.0"
+ id = "com.juegosrich.rich"
+ version = "1.0.0">
+ <name>RP-Animacion</name>
+ <descripcion>
+ 	Prueba
+ </descripcion>
+ <author email="andresparedes80@hotmail.com" href= "http://cordova.io">
+ 	Ricardo Paredes
+ </author>
+ <platform name="android"/>
+ <preference name="orientation" value= "landscape"/>
+ <preference name="fullscreen" value= "false"/>
+ <preference name="android-installLocation" value= "auto"/>
+ <content src= "index.html" />
+ <access origin="*" />
+ <icon src="icono.png" />
+ <splash src="splash.png"/>
+<gap:plugin name="cordova-plugin-splashscreen" source="npm"/>
+</widget>

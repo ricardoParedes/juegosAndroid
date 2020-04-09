@@ -1,0 +1,105 @@
+<!doctype html>
+<html><head>
+<meta charset= "utf-8">
+<title>CAnvas Animacion 5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="jq/css/themes/default/jquery.mobile-1.4.5.min.css"/>
+<script type="text-javascript" src="phonegap.js"></script>
+
+<style>
+	#miCanvas{
+		background: green;
+		border:dotted yellow 2px;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+<script> 
+var contexto;
+var canvas;
+var radio = 10;
+var bolax = 50;
+var bolay = 250;
+var dx = 4;
+var ancho;
+var largo;
+var limiteDerecha;
+var limiteIzquierda;
+var limiteArriba;
+var limiteAbajo;
+var dy = 4;
+
+//funciones
+function mueve(){
+	contexto.clearRect(0,0,canvas.width, canvas.height);
+	verifica();
+	contexto.beginPath();
+	contexto.arc(bolax,bolay,radio,0,2*Math.PI, true);
+	contexto.fill();
+	}
+function verifica(){
+	var nbolax = bolax + dx;
+	var nbolay = bolay + dy;
+	if(nbolax > limiteDerecha){
+		dx *= -1;
+		nbolax = limiteDerecha;
+	}
+	
+	if(nbolax < limiteIzquierda){
+		dx *= -1;
+		nbolax = limiteIzquierda;
+	}
+	//Nueva coordenada en y
+	if(nbolay > limiteAbajo){
+		dy *= -1;
+		nbolay = limiteAbajo;
+	}
+	
+	if(nbolay < limiteArriba){
+		dy *= -1;
+		nbolay = limiteArriba;
+	}
+	bolax= nbolax;
+	bolay = nbolay;
+}
+
+window.onload = function(){
+	canvas = document.getElementById("miCanvas");
+	if(canvas && canvas.getContext){
+		contexto = canvas.getContext("2d");
+		if(contexto){
+			//Leemos el tamano de la pantalla
+			viewportwidth = window.innerWidth-20;
+			viewportheight = window.innerHeight-20;
+			canvas.width= viewportwidth;
+			canvas.height = viewportheight;
+			//
+			ancho = canvas.width;
+			alto = canvas.height;
+			limiteDerecha = ancho - radio;
+			limiteIzquierda = radio;
+			//Calcular limites de arriba y abajo
+			limiteArriba = radio;
+			limiteAbajo = alto - radio;
+			//
+			contexto.lineWidth = radio;
+			contexto.fillStyle = "rgb(200,0,50)";
+			mueve();
+			setInterval(mueve,60);	
+				
+
+		} else{
+			alert("No cuentas con CANVAS");
+		}
+	}
+}
+</script>
+</head>
+
+<body>
+	<canvas id="miCanvas">
+		Tu navegador no soporta el canvas de HTML5
+	</canvas>
+</body>
+</html>
